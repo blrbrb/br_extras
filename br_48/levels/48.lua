@@ -53,21 +53,23 @@ br_core.register_level({
 
 br_core.register_biome({
     level = 48,
-    desc = S("Level 48 convience store"),
+    desc = S("Level 48 Store"),
     danger = 0,                  -- not used yet either, see above
     segheight = 7,               -- how high the schematics are (use smallest size and then skip_above to do complex stuff)
-    prevalence = 4,              -- how common this biome is within the level; avoid large numbers
+    prevalence = 3,              -- how common this biome is within the level; avoid large numbers
     can_generate = function(pos) -- must always be deterministic; no use of math.random
         return true
     end,
     schems = {
-        -- upper / ceiling level
-        -- ladder up, note skip_above=1
-        { name = sch("48_rooms_0"),    prevalence = 4, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_0"),    prevalence = 2, vertical_segments = { 0, 1 } },
         { name = sch("48_rooms_1"),    prevalence = 1, vertical_segments = { 0, 1 } },
-        { name = sch("48_hallways_0"), prevalence = 1, vertical_segments = { 0, 1 } }
+        { name = sch("48_hallways_0"), prevalence = 3, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_4"),    prevalence = 1, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_5"),    prevalence = 2, vertical_segments = { 0, 1 } },
     }
 })
+
+
 
 
 -- adds a photo of the level
