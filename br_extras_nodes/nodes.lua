@@ -107,6 +107,24 @@ minetest.register_node('br_extras_nodes:fridge_0_bottom', {
     sunlight_propagates = false,
     sounds = br_sounds.steel(),
     paramtype = "light",
+    lightsource = 0.1,
+    paramtype2 = "facedir"
+})
+
+minetest.register_node('br_extras_nodes:fridge_0_middle', {
+    description = 'br_extras_nodes:fridge_0_middle',
+    pointable = true,
+    groups = { oddly_breakable_by_hand = 2 },
+    tiles = { "br_concrete_meta_3.png", "br_duct_0.png", "br_duct_0.png", "br_duct_0.png",
+        {
+            name = "br_48_fridge_0_middle.png",
+            tileable_vertical = false,
+            tileable_horizontal = true
+        } },
+    sunlight_propagates = false,
+    sounds = br_sounds.steel(),
+    lightsource = 0.1,
+    paramtype = "light",
     paramtype2 = "facedir"
 })
 minetest.register_node('br_extras_nodes:br_48_fridge_0_top', {
@@ -121,6 +139,7 @@ minetest.register_node('br_extras_nodes:br_48_fridge_0_top', {
         } },
     sunlight_propagates = false,
     sounds = br_sounds.steel(),
+    lightsource = 0.1,
     paramtype = "light",
     paramtype2 = "facedir"
 })
@@ -169,3 +188,40 @@ minetest.register_node('br_extras_nodes:br_48_clothes_hanger', {
     paramtype = "light",
     paramtype2 = "facedir"
 })
+
+for i = 0, 1 do
+    core.register_node('br_extras_nodes:gendered_decal' .. "_" .. (i), {
+        description = 'br_extras_nodes:gendered_decal',
+        pointable = br_core.nodes_pointable or false,
+        groups = { dig_immediate = (br_core.dev_mode and 3) or 0 },
+        drawtype = "nodebox",
+        paramtype2 = "facedir",
+        paramtype = "light",
+        selection_box = {
+            type = "fixed",
+            fixed = {
+                {
+                    (-8) / 16, (-8) / 16, (7.9) / 16,
+                    (8) / 16, (8) / 16, (7.8) / 16,
+                },
+            },
+        },
+        node_box = {
+            type = "fixed",
+            fixed = {
+                {
+                    (-8) / 16, (-8) / 16, (7.9) / 16,
+                    (8) / 16, (8) / 16, (7.8) / 16,
+                },
+            },
+        },
+        sunlight_propagates = true,
+        use_texture_alpha = "clip",
+        walkable = false,
+        tiles = { {
+            name = "(br_gendered_decal.png^[multiply:" .. "#334" .. "^[verticalframe:2:" .. (i) .. ")",
+        } },
+        sounds = br_sounds.default(),
+        light_source = 1,
+    })
+end
