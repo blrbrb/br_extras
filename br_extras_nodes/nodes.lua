@@ -225,3 +225,40 @@ for i = 0, 1 do
         light_source = 1,
     })
 end
+
+--- BR 10
+minetest.register_node('br_extras_nodes:br_10_dirt', {
+    description = 'br_extras_nodes:dirt',
+    pointable = true,
+    groups = { oddly_breakable_by_hand = (br_core.dev_mode and 3) or 0 },
+    tiles = { "br_10_dirt.png" },
+    sunlight_propagates = false,
+    paramtype = "light",
+})
+minetest.register_node('br_extras_nodes:br_10_grass', {
+    description = 'br_extras_nodes:dirt',
+    pointable = true,
+    groups = { oddly_breakable_by_hand = (br_core.dev_mode and 3) or 0 },
+    tiles = { "br_10_dirt.png" },
+    sunlight_propagates = false,
+    paramtype = "light",
+})
+
+--wheat
+for i = 0, 1 do
+    core.register_node('br_extras_nodes:br_10_wheat' .. "_" .. (i), {
+        description = 'br_extras_nodes:br_10_wheat',
+        pointable = br_core.nodes_pointable or false,
+        groups = { dig_immediate = (br_core.dev_mode and 3) or 0, in_creative_inventory = 0 },
+        drawtype = "plantlike",
+        paramtype2 = "facedir",
+        paramtype = "light",
+        sunlight_propagates = true,
+        use_texture_alpha = "clip",
+        walkable = false,
+        tiles = { {
+            name = "(br_10_wheat.png^[verticalframe:2:" .. (i) .. ")",
+        } },
+        sounds = br_sounds.default(),
+    })
+end

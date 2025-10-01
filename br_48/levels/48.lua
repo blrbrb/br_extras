@@ -15,7 +15,7 @@ br_core.register_level({
     grace_dist = 5,      -- how much circular distance the first biome takes up around 0,0
     biome = {},          -- must be set to this, don't change
     segsize = 16,        -- width and length of each schematic to place
-    base_height = 7,     -- how high the spawn should be, how thick the floor of your level is (if you have 20 nodes below the playable area, set to 20)
+    base_height = 9,     -- how high the spawn should be, how thick the floor of your level is (if you have 20 nodes below the playable area, set to 20)
     sun = {
         visible = false, -- if false, shadows are turned off
         -- texture = "blank.png", -- makes sun invisible, but keeps shadows
@@ -65,6 +65,8 @@ br_core.register_biome({
         { name = sch("48_rooms_1"),    prevalence = 1, vertical_segments = { 0, 1 } },
         { name = sch("48_hallways_0"), prevalence = 3, vertical_segments = { 0, 1 } },
         { name = sch("48_rooms_4"),    prevalence = 1, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_9"),    prevalence = 1, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_10"),   prevalence = 1, vertical_segments = { 0, 1 } },
 
     }
 })
