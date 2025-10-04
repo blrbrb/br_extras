@@ -53,7 +53,7 @@ br_core.register_biome({
     schems = {
         { name = sch("10_rooms_0"), prevalence = 6, vertical_segments = { 0, 1 } },
         {
-            name = sch("barn_portal"),
+            name = sch("10_barn_portal"),
             vertical_segments = { 0, 1 },
             can_generate = function(pos, perlin)
                 ---core.debug(((pos.x %  == 0) and pos.z % 5 == 0))
@@ -82,6 +82,31 @@ br_core.register_biome({
     }
 })
 
+br_core.register_level_sound({
+    level = 10,
+    time = 20,
+    on_play = function(self, dtime, player)
+        local can_play = false
+        local playing = br_core.sound_get_tag("br_misty_hedges", player)
+        if playing == nil or #playing < 1
+            or (playing and playing[1].fading and #playing <= 1) then
+            can_play = true
+        end
+        if can_play then
+            br_core.sound_play("br_misty_hedges", player, {
+                name = "br_misty_hedges",
+                level = 10,
+                gain = (br_sounds.master or 1) * math.random() * 0.1,
+                fade = 0.9,
+                -- single_sound = true,
+                max_hear_distance = 50,
+                to_player = player:get_player_name(),
+                -- pos = get_centre_of_segment(player:get_pos()),
+                time = 20,
+            })
+        end
+    end
+})
 
 
 br_core.achievements.register_default(10)

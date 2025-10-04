@@ -97,8 +97,14 @@ br_core.register_biome({
         return true
     end,
     schems = {
-        { name = sch("48_rooms_7"),        prevalence = 2,   vertical_segments = { 0, 1 } },
-        { name = sch("48_rooms_7_portal"), prevalence = 0.1, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_7"), prevalence = 2, vertical_segments = { 0, 1 } },
+        {
+            name = sch("48_rooms_portal"),
+            can_generate = function(pos, perlin)
+                return ((pos.x % 3 == 0) and pos.z % 5 == 0)
+            end,
+            vertical_segments = { 0, 1 }
+        },
     }
 })
 
