@@ -266,11 +266,17 @@ end
 
 -- BR 84
 
+
 minetest.register_node('br_extras_core:br_84_hedge', {
     description = 'br_extras_core:br_84_hedge',
     pointable = true,
     groups = { dig_immediate = (br_core.dev_mode and 3) or 0 },
-    tiles = { "br_84_hedge.png" },
+    tiles = { {
+        name = "br_extras_meta_hedge.png^[multiply:#788e61",
+        align_style = "world",
+        scale = 1,
+    } },
+    --tiles = { "br_84_hedge.png" },
     sunlight_propagates = false,
     paramtype = "light",
 })

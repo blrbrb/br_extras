@@ -15,7 +15,7 @@ br_core.register_level({
     grace_dist = 5,      -- how much circular distance the first biome takes up around 0,0
     biome = {},          -- must be set to this, don't change
     segsize = 16,        -- width and length of each schematic to place
-    base_height = 3,     -- how high the spawn should be, how thick the floor of your level is (if you have 20 nodes below the playable area, set to 20)
+    base_height = 6,     -- how high the spawn should be, how thick the floor of your level is (if you have 20 nodes below the playable area, set to 20)
     sun = {
         visible = false, -- if false, shadows are turned off
         -- texture = "blank.png", -- makes sun invisible, but keeps shadows
@@ -60,30 +60,61 @@ br_core.register_biome({
     end,
     schems = {
 
-        { name = sch("84_path_straight_0"), prevalence = 1, vertical_segments = { 0, 1 } },
-        { name = sch("84_path_straight_1"), prevalence = 1, vertical_segments = { 0, 1 } },
-        { name = sch("84_path_branch"),     prevalence = 2, vertical_segments = { 0, 1 } },
-        { name = sch("84_rooms_1"),         prevalence = 1, vertical_segments = { 0, 1 } },
-        { name = sch("84_rooms_2"),         prevalence = 1, vertical_segments = { 0, 1 } },
-        { name = sch("84_rooms_3"),         prevalence = 3, vertical_segments = { 0, 1 } },
-        { name = sch("84_rooms_0"),         prevalence = 2, vertical_segments = { 0, 1 } },
+        {
+            name = sch("84_path_straight_0"),
+            can_generate = function(pos, perlin)
+                --can connect at four other positions, on each side
+                -- should form a grid, and not connect on any side to itself
+                return ((math.abs(pos.x) % 2 == 0) and math.abs(pos.z) % 2 == 0)
+            end,
+            vertical_segments = { 0, 2 },
+        },
+        {
+            name = sch("84_path_straight_1"),
+            can_generate = function(pos, perlin)
+                --can connect at four other positions, on each side
+                -- should form a grid, and not connect on any side to itself
+                return ((math.abs(pos.x) % 2 == 0) and math.abs(pos.z) % 2 == 0)
+            end,
+            vertical_segments = { 0, 2 }
+        },
+        {
+            name = sch("84_corner_0"),
+            can_generate = function(pos, perlin)
+                --can connect at four other positions, on each side
+                -- should form a grid, and not connect on any side to itself
+                return ((math.abs(pos.x) % 4 == 0) and math.abs(pos.z) % 4 == 0)
+            end,
+            vertical_segments = { 0, 1 }
+        },
+        { name = sch("84_path_branch"), prevalence = 1, vertical_segments = { 0, 1 } },
+        {
+            name = sch("84_rooms_portal"),
+            can_generate = function(pos, perlin)
+                return ((math.abs(pos.x) % 6 == 0) and math.abs(pos.z) % 6 == 0)
+            end,
+            vertical_segments = { 0, 1 }
+        },
+        {
+            name = sch("84_rooms_2"),
+            can_generate = function(pos, perlin)
+                --can connect at four other positions, on each side
+                -- should form a grid, and not connect on any side to itself
+                return ((math.abs(pos.x) % 8 == 0) and math.abs(pos.z) % 8 == 0)
+            end,
+            vertical_segments = { 0, 1 }
+        },
+        -- { name = sch("84_rooms_0"), prevalence = 2, vertical_segments = { 0, 1 } },
         {
             name = sch("84_path_straight_easter_egg"),
             can_generate = function(pos, perlin)
-                if ((pos.x > 1000) and pos.z > 1000) then
+                if ((math.abs(pos.x) > 1000) and math.abs(pos.z) > 1000) then
                     return ((pos.x % 9 == 0) and pos.z % 3 == 0)
                 end
             end,
             vertical_segments = { 0, 1 }
         },
-        {
-            name = sch("84_rooms_portal"),
-            can_generate = function(pos, perlin)
-                ---core.debug(((pos.x %  == 0) and pos.z % 5 == 0))
-                return ((pos.x % 5 == 0) and pos.z % 7 == 0)
-            end,
-            vertical_segments = { 0, 1 }
-        },
+
     }
 })
 
