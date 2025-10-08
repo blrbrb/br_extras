@@ -41,7 +41,7 @@ br_core.register_level({
             fog_tint_type = "custom",
         },
         fog = {
-            fog_distance = 15,
+            fog_distance = 32,
             fog_start = 0.5,
         }
     },
@@ -108,8 +108,8 @@ br_core.register_biome({
         {
             name = sch("84_path_straight_easter_egg"),
             can_generate = function(pos, perlin)
-                if ((math.abs(pos.x) > 1000) and math.abs(pos.z) > 1000) then
-                    return ((pos.x % 9 == 0) and pos.z % 3 == 0)
+                if ((math.abs(pos.x) > 1000) and math.abs(pos.z) > 2000) then
+                    return ((pos.x % 9 == 0) and pos.z % 7 == 0)
                 end
             end,
             vertical_segments = { 0, 1 }

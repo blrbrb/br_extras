@@ -8,17 +8,16 @@ end
 
 -- hub
 br_core.register_level({
-    level = 48,          -- actual index of the level, will overwrite any level of the same name
+    level = 48,
     desc = S("Level 48"),
-    secret = false,      -- if true, the photo/achievement is not given automatically to the player on join
-    danger = 0,          -- not used in game, but for compat with possible mods; 0=safe, 1=rare, 2=danger, 3=ridiculously dangerous
-    grace_dist = 5,      -- how much circular distance the first biome takes up around 0,0
-    biome = {},          -- must be set to this, don't change
-    segsize = 16,        -- width and length of each schematic to place
-    base_height = 9,     -- how high the spawn should be, how thick the floor of your level is (if you have 20 nodes below the playable area, set to 20)
+    secret = false,
+    danger = 0,
+    grace_dist = 5,
+    biome = {},
+    segsize = 16,
+    base_height = 9,
     sun = {
-        visible = false, -- if false, shadows are turned off
-        -- texture = "blank.png", -- makes sun invisible, but keeps shadows
+        visible = false,
         sunrise_visible = false,
     },
     moon = {
@@ -73,7 +72,7 @@ br_core.register_biome({
 
 br_core.register_biome({
     level = 48,
-    desc = S("Level 48 Clothing Department"),
+    desc = S("Level 48 Clothing Aisle"),
     danger = 0,
     segheight = 7,
     prevalence = 2,
@@ -81,15 +80,21 @@ br_core.register_biome({
         return true
     end,
     schems = {
-        { name = sch("48_rooms_5"), prevalence = 3,   vertical_segments = { 0, 1 } },
-        { name = sch("48_rooms_6"), prevalence = 1,   vertical_segments = { 0, 1 } },
-        { name = sch("48_rooms_8"), prevalence = 0.5, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_5"), prevalence = 3, vertical_segments = { 0, 1 } },
+        { name = sch("48_rooms_6"), prevalence = 1, vertical_segments = { 0, 1 } },
+        {
+            name = sch("48_rooms_8"),
+            can_generate = function(pos, perlin)
+                return ((pos.x % 7 == 0) and pos.z % 7 == 0)
+            end,
+            vertical_segments = { 0, 1 }
+        },
     }
 })
 
 br_core.register_biome({
     level = 48,
-    desc = S("Level 48 Freezers"),
+    desc = S("Level 48 Freezer Aisle"),
     danger = 0,
     segheight = 7,
     prevalence = 1,
@@ -110,21 +115,4 @@ br_core.register_biome({
 
 
 
-
--- adds a photo of the level
 br_core.achievements.register_default(48)
-
-
---[[
-    rotation="0" will lock the rotation to 0 or whatever other direction (0, 90, 180, 270)
-    no_rotation=true just means "0"
-    prevalence is how common it is, but avoid setting huge values
-    skip_above=3 means it will place this schematic, and then the next 3 vertical segments will
-        be skipped to prevent game from generating on top of previous ones
-    vertical_segments is a list of positions that allow (1) or disallow (0) placing this schematic
-        so if you have a basement schem, you set it to {1,0} and a ground floor would be {0,1} because
-        you don't want basements spawning on the ground floor
-
-    {name="154_rooms_0", rotation="0", prevalence=1, vertical_segments={1,0,0,0}, skip_above=3},
-
-]] --

@@ -1,41 +1,30 @@
-minetest.register_node('br_extras_core:br_48_shelf_0', {
-    description = 'br_extras_core:br_48_shelf_0',
-    pointable = true,
-    groups = { oddly_breakable_by_hand = 2 },
-    tiles = { "br_48_shelf_0.png" },
-    sunlight_propagates = false,
-    sounds = br_sounds.steel(),
-    paramtype = "light"
+for i = 0, 2 do
+    core.register_node('br_extras_core:br_48_shelf_' .. i, {
+        description = 'br_extras_core:br_48_shelf_' .. i,
+        pointable = true,
+        groups = { oddly_breakable_by_hand = (br_core.dev_mode and 2) or 0 },
+        tiles = { {
+            name = "br_extras_meta_empty_shelf.png^[multiply:#858585" ..
+                "^br_extras_meta_overlay_store_shelf_" .. i .. ".png^[opacity:100",
+            align_style = "world",
+            scale = 1,
+        } },
+        sunlight_propagates = false,
+        paramtype = "light",
+    })
+end
 
-})
-
-minetest.register_node('br_extras_core:br_48_shelf_1', {
-    description = 'br_store:br_48_shelf_1',
-    pointable = true,
-    groups = { oddly_breakable_by_hand = 2 },
-    tiles = { "br_48_shelf_1.png" },
-    sunlight_propagates = false,
-    sounds = br_sounds.steel(),
-    paramtype = "light"
-})
-
-
-minetest.register_node('br_extras_core:br_48_shelf_2', {
-    description = 'br_extras_nodes_nodes:br_48_shelf_2',
-    pointable = true,
-    groups = { oddly_breakable_by_hand = 2 },
-    tiles = { "br_48_shelf_2.png" },
-    sunlight_propagates = false,
-    sounds = br_sounds.steel(),
-    paramtype = "light"
-})
 
 
 minetest.register_node('br_extras_core:br_48_shelf_empty', {
     description = 'br_extras_nodes_nodes:br_48_shelf_empty',
     pointable = true,
     groups = { oddly_breakable_by_hand = 2 },
-    tiles = { "br_48_shelf_empty.png" },
+    tiles = { {
+        name = "br_extras_meta_empty_shelf.png^[multiply:#858585",
+        align_style = "world",
+        scale = 1,
+    } },
     sunlight_propagates = false,
     sounds = br_sounds.steel(),
     paramtype = "light"
@@ -181,7 +170,7 @@ minetest.register_node('br_extras_core:br_48_clothes_hanger', {
     drawtype = "mesh",
     groups = { oddly_breakable_by_hand = 2 },
     tiles = { "br_48_clothes_hanger.png" },
-    visual_scale = 0.15,
+    --visual_scale = 0.15,
     mesh = "br_48_clothes_hanger.obj",
     sunlight_propagates = false,
     sounds = br_sounds.steel(),
@@ -219,7 +208,7 @@ for i = 0, 1 do
         use_texture_alpha = "clip",
         walkable = false,
         tiles = { {
-            name = "(br_gendered_decal.png^[multiply:" .. "#334" .. "^[verticalframe:2:" .. (i) .. ")",
+            name = "(br_extras_gendered_decal.png^[multiply:" .. "#334" .. "^[verticalframe:2:" .. (i) .. ")",
         } },
         sounds = br_sounds.default(),
         light_source = 1,
@@ -231,15 +220,11 @@ minetest.register_node('br_extras_core:br_10_dirt', {
     description = 'br_extras_core:dirt',
     pointable = true,
     groups = { oddly_breakable_by_hand = (br_core.dev_mode and 3) or 0 },
-    tiles = { "br_10_dirt.png" },
-    sunlight_propagates = false,
-    paramtype = "light",
-})
-minetest.register_node('br_extras_core:br_10_grass', {
-    description = 'br_extras_core:dirt',
-    pointable = true,
-    groups = { oddly_breakable_by_hand = (br_core.dev_mode and 3) or 0 },
-    tiles = { "br_10_dirt.png" },
+    tiles = { {
+        name = "br_extras_meta_soil.png^[multiply:#ffd624",
+        align_style = "world",
+        scale = 1,
+    } },
     sunlight_propagates = false,
     paramtype = "light",
 })
@@ -257,7 +242,7 @@ for i = 0, 1 do
         use_texture_alpha = "clip",
         walkable = false,
         tiles = { {
-            name = "(br_10_wheat.png^[verticalframe:2:" .. (i) .. ")",
+            name = "(br_extras_meta_tallgrass.png^[multiply:#ffe470^[verticalframe:2:" .. (i) .. ")",
         } },
         sounds = br_sounds.default(),
     })
@@ -319,3 +304,22 @@ core.register_node('br_extras_core:84_secret_easter_egg', {
     sounds = br_sounds.default(),
     light_source = 1,
 })
+
+
+-- BR ??
+
+for i = 0, 2 do
+    core.register_node('br_extras_core:br_bookshelf_' .. i, {
+        description = 'br_extras_core:br_bookshelf',
+        pointable = true,
+        groups = { oddly_breakable_by_hand = (br_core.dev_mode and 2) or 0 },
+        tiles = { {
+            name = "br_extras_meta_empty_shelf.png^[multiply:#796035" ..
+                "^br_extras_meta_overlay_bookshelf_" .. i .. ".png^[opacity:100",
+            align_style = "world",
+            scale = 1,
+        } },
+        sunlight_propagates = false,
+        paramtype = "light",
+    })
+end
